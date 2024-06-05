@@ -3,6 +3,7 @@ pub enum Actions {
     Attack,
     Defend,
     UsePotion,
+    ViewInvintory,
     Skip,
 }
 
@@ -12,6 +13,7 @@ impl Actions {
             Actions::Attack,
             Actions::Defend,
             Actions::UsePotion,
+            Actions::ViewInvintory,
             Actions::Skip,
         ];
         VARIANTS
@@ -22,7 +24,8 @@ impl Actions {
             1 => Some(Actions::Attack),
             2 => Some(Actions::Defend),
             3 => Some(Actions::UsePotion),
-            4 => Some(Actions::Skip),
+            4 => Some(Actions::ViewInvintory),
+            5 => Some(Actions::Skip),
             _ => None,
         }
     }
