@@ -4,6 +4,7 @@ use rand::Rng;
 mod submodules;
 use submodules::game::start::player_setup;
 use submodules::game::actions::actions;
+use submodules::game::combatants::enemies;
 
 fn main() {
     let player = player_setup();
@@ -15,7 +16,7 @@ fn main() {
         let mut action_no = String::new();
 
         // List actions available
-        actions::view_actions();
+        actions::Actions::view_actions();
 
         // Get player input on action chossen as a number
         io::stdin().read_line(&mut action_no).expect("Failed to read line");
@@ -39,5 +40,12 @@ fn main() {
 
         println!("Action Number: {}", action_no);
         println!("Action: {:?}", action);
+
+        let enemy = enemies::Enemy::new(
+            enemies::EnemyClasses::AcolyteMage,
+            String::from("Randome Mage")
+        );
+
+        println!("\n ENEMY HAS APPEARED: {:#?}", enemy);
     }
 }

@@ -29,10 +29,10 @@ impl Actions {
             _ => None,
         }
     }
-}
 
-pub fn view_actions() {
-    for (index, action) in Actions::variants().iter().enumerate() {
-        println!("{}: {:?}", index + 1, action);
+    pub fn view_actions() {
+        for (index, action) in Actions::variants().iter().enumerate() {
+            println!("{}: {:?}", index + 1, action);
+        }
     }
 }
