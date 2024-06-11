@@ -4,15 +4,39 @@ use rand::Rng;
 mod submodules;
 use submodules::game::start::player_setup;
 use submodules::game::actions::actions;
+use submodules::game::actions::attack;
+use submodules::game::combatants::enemy_attack;
 use submodules::game::combatants::enemies;
+use std::thread::sleep;
+use std::time::Duration;
 
 fn main() {
-    let player = player_setup();
+    let mut player = player_setup();
     //println!("{:#?}", player);
 
-    player.get_stats();
+    println!("\nPlayer Character Has Been Created.");
+
+    // Create Enemy
+    let mut enemy = enemies::Enemy::new(
+        enemies::EnemyClasses::AcolyteMage,
+        String::from("Randome Mage")
+    );
+
+    sleep(Duration::from_millis(1500));
+    println!("Walking...");
+    sleep(Duration::from_millis(1500));
+    println!("Reaching top of hill");
+    sleep(Duration::from_millis(1500));
+    println!("What is that?");
+    sleep(Duration::from_millis(1500));
+
+    println!("\n ENEMY HAS APPEARED");
+    sleep(Duration::from_millis(1000));
+
+    sleep(Duration::from_millis(3000));
+
     loop {
-        println!("\nChoose your action.");
+        println!("\nWhat will you do?\n");
         let mut action_no = String::new();
 
         // List actions available
@@ -38,14 +62,50 @@ fn main() {
             None => actions::Actions::Skip,
         };
 
-        println!("Action Number: {}", action_no);
-        println!("Action: {:?}", action);
+        println!("\nYou have choosen {:?}", action);
+        sleep(Duration::from_millis(1500));
 
-        let enemy = enemies::Enemy::new(
-            enemies::EnemyClasses::AcolyteMage,
-            String::from("Randome Mage")
-        );
+        match action {
+            actions::Actions::Attack => {
+                attack::attack_enemy(&mut player, &mut enemy);
+            }
+            actions::Actions::Defend => {}
+            actions::Actions::ViewInvintory => {}
+            actions::Actions::UsePotion => {}
+            actions::Actions::Skip => {}
+            actions::Actions::ViewStats => {
+                player.get_stats();
+                continue;
+            }
+            actions::Actions::ViewEnemyStats => {
+                enemy.get_stats();
+                continue;
+            }
+            other => println!("Not an action"),
+        }
 
-        println!("\n ENEMY HAS APPEARED: {:#?}", enemy);
+        sleep(Duration::from_millis(1000));
+        println!("\n{}'s Health: {}", player.name, player.health);
+        println!("{}'s Health: {}\n", enemy.name, enemy.health);
+        sleep(Duration::from_millis(3000));
+
+        if enemy.health <= 0.0 {
+            println!("You have defeted {}", enemy.name);
+            break;
+        } else if player.health <= 0.0 {
+            println!("{}, you have been defeted by {}", player.name, enemy.name);
+            break;
+        }
+
+        //enemy attack
+        enemy_attack::enemy_attack(&mut player, &mut enemy);
+
+        if enemy.health <= 0.0 {
+            println!("You have defeted {}", enemy.name);
+            break;
+        } else if player.health <= 0.0 {
+            println!("{}, you have been defeted by {}", player.name, enemy.name);
+            break;
+        }
     }
 }

@@ -12,7 +12,9 @@ pub enum EnemyClasses {
 pub struct Enemy {
     pub name: String,
     pub class: EnemyClasses,
-    pub health: i32,
+    pub level: i32,
+    pub health: f64,
+    pub def: i32,
     pub str: i32,
     pub dex: i32,
     pub stam: i32,
@@ -27,8 +29,10 @@ impl Enemy {
             EnemyClasses::AcolyteMage => {
                 Self {
                     name: enemy_name,
+                    level: 1,
                     class: class_type,
-                    health: 10,
+                    health: 100.0,
+                    def: 2,
                     str: 2,
                     dex: 5,
                     stam: 2,
@@ -43,14 +47,25 @@ impl Enemy {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
             EnemyClasses::ApostleWarrior => {
                 Self {
                     name: enemy_name,
                     class: class_type,
-                    health: 10,
+                    level: 1,
+                    health: 100.0,
+                    def: 4,
                     str: 5,
                     dex: 3,
                     stam: 4,
@@ -65,14 +80,25 @@ impl Enemy {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
             EnemyClasses::AdeptArcher => {
                 Self {
                     name: enemy_name,
                     class: class_type,
-                    health: 8,
+                    level: 1,
+                    health: 100.0,
+                    def: 3,
                     str: 4,
                     dex: 5,
                     stam: 4,
@@ -87,13 +113,22 @@ impl Enemy {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
         }
     }
 
     pub fn get_stats(&self) {
-        println!("{:#?}", self);
+        println!("\n{:#?}", self);
     }
 }

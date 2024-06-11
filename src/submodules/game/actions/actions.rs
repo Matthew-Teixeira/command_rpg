@@ -5,6 +5,8 @@ pub enum Actions {
     UsePotion,
     ViewInvintory,
     Skip,
+    ViewStats,
+    ViewEnemyStats,
 }
 
 impl Actions {
@@ -15,6 +17,8 @@ impl Actions {
             Actions::UsePotion,
             Actions::ViewInvintory,
             Actions::Skip,
+            Actions::ViewStats,
+            Actions::ViewEnemyStats,
         ];
         VARIANTS
     }
@@ -26,6 +30,8 @@ impl Actions {
             3 => Some(Actions::UsePotion),
             4 => Some(Actions::ViewInvintory),
             5 => Some(Actions::Skip),
+            6 => Some(Actions::ViewStats),
+            7 => Some(Actions::ViewEnemyStats),
             _ => None,
         }
     }

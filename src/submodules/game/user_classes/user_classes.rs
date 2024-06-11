@@ -12,9 +12,11 @@ pub enum UserClass {
 pub struct Player {
     pub name: String,
     pub class: UserClass,
+    pub level: i32,
     pub equ_inventory: i32,
     pub potion_inventory: i32,
-    pub health: i32,
+    pub health: f64,
+    pub def: i32,
     pub str: i32,
     pub dex: i32,
     pub stam: i32,
@@ -30,9 +32,11 @@ impl Player {
                 Self {
                     name: String::from(player_name),
                     class: class_type,
+                    level: 1,
                     equ_inventory: 10,
                     potion_inventory: 15,
-                    health: 20,
+                    health: 200.0,
+                    def: 3,
                     str: 6,
                     dex: 12,
                     stam: 6,
@@ -47,16 +51,27 @@ impl Player {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
             UserClass::Warrior => {
                 Self {
                     name: String::from(player_name),
                     class: class_type,
+                    level: 1,
                     equ_inventory: 15,
                     potion_inventory: 10,
-                    health: 20,
+                    health: 200.0,
+                    def: 5,
                     str: 16,
                     dex: 10,
                     stam: 10,
@@ -71,16 +86,27 @@ impl Player {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
             UserClass::Archer => {
                 Self {
                     name: String::from(player_name),
                     class: class_type,
+                    level: 1,
                     equ_inventory: 13,
                     potion_inventory: 12,
-                    health: 20,
+                    health: 200.0,
+                    def: 4,
                     str: 12,
                     dex: 12,
                     stam: 12,
@@ -95,14 +121,23 @@ impl Player {
                         ele_dam_type: damage::ElementTypes::NoElement,
                         one_handed: false,
                     }),
-                    off_weap: weapon_types::WeaponType::NoWeapon,
+                    off_weap: weapon_types::WeaponType::NoWeapon(weapon_types::Fist {
+                        name: String::from("Fist of Cuffs"),
+                        lv: 1,
+                        atk: 2,
+                        def: 1,
+                        atk_type: damage::AttackTypes::Physical,
+                        ele_dam: 0,
+                        ele_dam_type: damage::ElementTypes::NoElement,
+                        one_handed: false,
+                    }),
                 }
             }
         }
     }
 
     pub fn get_stats(&self) {
-        println!("{:#?}", self);
+        println!("\n{:#?}", self);
     }
 }
 
